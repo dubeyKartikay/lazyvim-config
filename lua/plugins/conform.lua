@@ -12,7 +12,7 @@ return {
         lua = { "stylua" },
         fish = { "fish_indent" },
         sh = { "shfmt" },
-        java = { "clang-format" },
+        -- java uses LSP (jdtls) formatter via fallback
       },
       -- The options you set here will be merged with the builtin formatters.
       -- You can also define any custom formatters here.
