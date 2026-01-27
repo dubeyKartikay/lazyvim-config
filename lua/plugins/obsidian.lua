@@ -6,10 +6,14 @@ return {
   ---@type obsidian.config
   opts = {
     legacy_commands = false, -- this will be removed in the next major release
+    note_id_func = function (title)
+      local safe_title = title:gsub(" ", "-"):gsub("%W", "")
+      return safe_title
+    end,
     workspaces = {
       {
-        name = "personal",
-        path = "~/vaults/personal",
+        name = "notes",
+        path = "~/my_notes",
       },
     },
   },

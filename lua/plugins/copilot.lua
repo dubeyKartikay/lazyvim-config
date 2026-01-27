@@ -5,7 +5,7 @@ return {
   event = "InsertEnter",
   opts = {
     suggestion = {
-      enabled = true,
+      enabled = false,
       auto_trigger = true,
       keymap = {
         accept = false, -- handled by nvim-cmp / blink.cmp
