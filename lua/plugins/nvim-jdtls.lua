@@ -2,6 +2,7 @@ return {
   "mfussenegger/nvim-jdtls",
   dependencies = { "folke/which-key.nvim" },
   opts = function(_, opts)
+    local formatter_path = vim.fn.stdpath("config") .. "/jdtls-formatter.xml"
     local cmd = { vim.fn.exepath("jdtls") }
     if LazyVim.has("mason.nvim") then
       local lombok_jar = vim.fn.expand("$MASON/share/jdtls/lombok.jar")
@@ -50,8 +51,14 @@ return {
     opts.settings = opts.settings or {}
     opts.settings.java = opts.settings.java or {}
 
-    -- Formatter settings are now in project .settings/org.eclipse.jdt.core.prefs
-    -- which jdtls reads automatically
+    -- Use the workspace formatter profile to keep Java indentation stable.
+    opts.settings.java.format = {
+      enabled = true,
+      settings = {
+        url = vim.uri_from_fname(formatter_path),
+        profile = "IntelliJStyle",
+      },
+    }
 
     opts.settings.java.saveActions = {
       organizeImports = false,
@@ -93,6 +100,17 @@ return {
         },
       },
     }
+
+    local orig_on_attach = opts.on_attach
+    opts.on_attach = function(args)
+      vim.bo[args.buf].expandtab = true
+      vim.bo[args.buf].tabstop = 4
+      vim.bo[args.buf].softtabstop = 4
+      vim.bo[args.buf].shiftwidth = 4
+      if orig_on_attach then
+        orig_on_attach(args)
+      end
+    end
 
     return opts
   end,

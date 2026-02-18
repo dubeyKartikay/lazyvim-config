@@ -4,6 +4,7 @@
 local map = vim.keymap.set
 map("n", "-", "<cmd>Neotree<CR>", { desc = "Start Neotree" })
 map("n", "<leader>rm", "<cmd>RemoteStart<CR>", { desc = "Start Remote" })
+map("n", "<leader>gd", "<cmd>Gitsigns diffthis<CR>", { desc = "Git diff current bufffer with latest commit" })
 -- map("n", "<Tab>", "<cmd>BufferLineCycleNext<CR>", { desc = "Next buffer" })
 -- map("n", "<S-Tab>", "<cmd>BufferLineCyclePrev<CR>", { desc = "Previous buffer" })
 map("n", "<M-x>", "<cmd>tabclose<CR>")
